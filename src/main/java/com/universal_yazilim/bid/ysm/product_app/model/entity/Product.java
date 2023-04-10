@@ -4,13 +4,14 @@ import lombok.Data;
 import lombok.NonNull;
 
 import javax.persistence.*;
+import java.util.Comparator;
 import java.util.Date;
 
 @Data
 @SequenceGenerator(name = "PRODUCTS_SEQUENCE", sequenceName = "PRODUCTS_SEQ", initialValue = 1, allocationSize = 1)
 @Table(name = "PRODUCTS")
 @Entity
-public class Product
+public class Product implements Comparable<Product>
 {
     @Column(name = "PRODUCT_ID",  nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRODUCTS_SEQUENCE")
@@ -29,4 +30,10 @@ public class Product
 
     @Column(nullable = false)
     private Date created;
+
+    @Override
+    public int compareTo(Product o) {
+        return Comparator.comparing(Product::getProductID).reversed()
+                .compare(this, o);
+    }
 }
