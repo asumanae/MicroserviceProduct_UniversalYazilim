@@ -1,0 +1,9 @@
+{
+  "name": "universal-asuman-product",
+  "buildpacks":
+          [
+            {
+              "url": "heroku/gradle"
+            }
+          ]
+}
